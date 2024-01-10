@@ -1,0 +1,81 @@
+<form [formGroup]="formdetails">
+  <ul class="container">
+    <li class="inside_container">
+      <mat-form-field>
+        <mat-label> Element Name </mat-label>
+        <input required matInput type="text" formControlName="n" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Element Type</mat-label>
+        <mat-select formControlName="t" [(ngModel)]="value">
+          <mat-option value="text">Text</mat-option>
+          <mat-option value="password">Password</mat-option>
+          <mat-option value="email">Email</mat-option>
+          <mat-option value="dropdown">DropDown</mat-option>
+          <mat-option value="radio">Radio</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Required</mat-label>
+        <mat-select formControlName="req">
+          <mat-option value="true">Yes</mat-option>
+          <mat-option value="false">No</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </li>
+
+    <li
+      class="inside_container"
+      *ngIf="value == 'dropdown' || value == 'radio'"
+    >
+      <mat-form-field class="example-chip-list">
+        <mat-label>Enter Options</mat-label>
+        <mat-chip-grid #chipGrid aria-label="Enter Options">
+          @for (opt of options; track opt) {
+          <mat-chip-row
+            (removed)="remove(opt)"
+            [editable]="true"
+            (edited)="edit(opt, $event)"
+            [aria-description]="'press enter to edit ' + opt"
+          >
+            {{ opt }}
+            <button matChipRemove [attr.aria-label]="'remove ' + opt">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+          }
+          <input
+            placeholder="Add Option"
+            [matChipInputFor]="chipGrid"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)"
+          />
+        </mat-chip-grid>
+      </mat-form-field>
+    </li>
+
+    <li class="inside_container">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="create_table()"
+        [disabled]="a_services.flag"
+      >
+        Add Element
+      </button>
+      <button mat-raised-button color="warn" (click)="generate_code()">
+        Generate form
+      </button>
+    </li>
+  </ul>
+</form>
+<section>
+  <app-table *ngIf="a_services.flag === false"></app-table>
+</section>
+
+<section>
+  <app-preview *ngIf="a_services.flag"></app-preview>
+</section>

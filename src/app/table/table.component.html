@@ -1,0 +1,54 @@
+<!-- <table>
+  <tr class="container">
+    <th>Name</th>
+    <th>Type</th>
+    <th>Req</th>
+    <th>Options</th>
+  </tr>
+
+  <section *ngFor="let d of a_services.details">
+    <tr class="container">
+      <td>{{ d.name }}</td>
+      <td>{{ d.type }}</td>
+      <td>{{ d.required }}</td>
+      <td>{{ d.options }}</td>
+    </tr>
+  </section>
+</table> -->
+
+<table
+  mat-table
+  #table
+  [dataSource]="a_services.getValue()"
+  class="mat-elevation-z8"
+>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef>Type</th>
+    <td mat-cell *matCellDef="let element">{{ element.type }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="required">
+    <th mat-header-cell *matHeaderCellDef>Required</th>
+    <td mat-cell *matCellDef="let element">{{ element.required }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="options">
+    <th mat-header-cell *matHeaderCellDef>Options</th>
+    <td mat-cell *matCellDef="let element">{{ element.options }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+<section>
+  <app-preview *ngIf="a_services.flag"></app-preview>
+</section>
+
+<section>
+  <app-preview *ngIf="a_services.flag"></app-preview>
+</section>
