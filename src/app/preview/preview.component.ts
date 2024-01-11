@@ -82,6 +82,7 @@ export class PreviewComponent implements OnInit{
       }
 
     }
+    this.code += '<button mat-raised-button color="primary">Submit</button>\n';
     this.code += '</div>\n';
     this.code += '</form>'
   }

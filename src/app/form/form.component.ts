@@ -105,6 +105,7 @@ export class FormComponent{
     this.options = [];
 
     this.a_services.setValue(this.dets);
+    this.a_services.temp = this.dets;
   }
 
   generate_code()
